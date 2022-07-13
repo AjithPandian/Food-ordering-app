@@ -1,0 +1,28 @@
+<div class="menu-container">
+  <div class="card-container">
+    <section class="card" *ngFor="let item of foodItems">
+      <h3 class="food-item">{{ item.name }}</h3>
+      <span class="features inline-block">Price: Rs.{{ item.price }}</span>
+      <span class="features inline-block">Cuisine: {{ item.cuisine }}</span>
+      <select
+        name="availability"
+        id="availability"
+        class="features inline-block"
+      >
+        <option value="dineOption" *ngFor="let dineOption of item.availability">
+          {{ dineOption }}
+        </option>
+      </select>
+      <span class="features inline-block">Type: {{ item.type }}</span>
+      <div class="features">
+        <label for="quantity">Quantity: </label>
+        <input
+          type="number"
+          id="quantity"
+          min="1"
+          (change)="handleValueChange($event, item)"
+        />
+      </div>
+    </section>
+  </div>
+</div>

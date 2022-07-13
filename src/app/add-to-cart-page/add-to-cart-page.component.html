@@ -1,0 +1,37 @@
+<div class="add-to-cart-container">
+  <div class="card-container">
+    <section
+      class="card"
+      *ngFor="let item of itemsfromMenu; let indexOfelement = index"
+    >
+      <span class="features inline-block">Name: {{ item.name }}</span>
+      <span class="features inline-block">Price: Rs.{{ item.price }}</span>
+      <span class="features inline-block">Cuisine: {{ item.cuisine }}</span>
+      <span class="features inline-block">Type: {{ item.type }}</span>
+      <div class="features">
+        <label for="quantity">Quantity: </label>
+        <input
+          [(ngModel)]="item.quantity"
+          type="number"
+          id="quantity"
+          min="1"
+        />
+      </div>
+      <span
+        class="features inline-block cursor-pointer"
+        (click)="removeItem(indexOfelement)"
+        >Delete</span
+      >
+    </section>
+    <button
+      *ngIf="itemsfromMenu.length > 0"
+      class="order cursor-pointer"
+      (click)="placeOrder()"
+    >
+      Place Order
+    </button>
+    <span *ngIf="itemsfromMenu.length === 0" class="features inline-block"
+      >No items in the cart</span
+    >
+  </div>
+</div>

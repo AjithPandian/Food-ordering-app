@@ -1,0 +1,158 @@
+<div class="orders-page-container">
+  <span *ngIf="ordersData.length === 0">No data found</span>
+  <br />
+  <div class="flex">
+    <input
+      class="search-align"
+      placeholder="Type to search"
+      type="text"
+      [(ngModel)]="searchText"
+    />
+    <div class="filter-align">
+      <input
+        class="mr-15"
+        (change)="handleFilter($event)"
+        type="checkbox"
+        id="freq-ordered"
+        name="freq-ordered"
+        value="Frequently ordered"
+      />
+      <label class="mr-15" for="freq-ordered">Frequently ordered</label>
+      <input
+        class="mr-15"
+        (change)="handleFilter($event)"
+        type="checkbox"
+        id="Veg"
+        name="Veg"
+        value="Veg"
+      />
+      <label class="mr-15" for="Veg">Veg</label>
+      <input
+        class="mr-15"
+        (change)="handleFilter($event)"
+        type="checkbox"
+        id="Non-Veg"
+        name="Non-Veg"
+        value="Non-Veg"
+      />
+      <label class="mr-15" for="Non-Veg">Non-Veg</label>
+      <input
+        class="mr-15"
+        (change)="handleFilter($event)"
+        type="checkbox"
+        id="South"
+        name="South"
+        value="South Indian"
+      />
+      <label class="mr-15" for="South">South Indian</label>
+      <input
+        class="mr-15"
+        (change)="handleFilter($event)"
+        type="checkbox"
+        id="North"
+        name="North"
+        value="North Indian"
+      />
+      <label class="mr-15" for="North">North Indian</label>
+    </div>
+  </div>
+
+  <div class="table-container" *ngIf="ordersData.length > 0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="th-rows">Order Date</th>
+          <th class="th-rows">Order Time</th>
+          <th class="th-rows">
+            <div class="sort-align">
+              <span class="display-block">Item</span>
+              <div class="sort-arrows">
+                <i
+                  class="fa fa-angle-up arrows"
+                  aria-hidden="true"
+                  (click)="sortedColumn = ['name', 'asc']"
+                ></i>
+                <i
+                  class="fa fa-angle-down arrows"
+                  aria-hidden="true"
+                  (click)="sortedColumn = ['name', 'desc']"
+                ></i>
+              </div>
+            </div>
+          </th>
+          <th class="th-rows">
+            <div class="sort-align">
+              <span class="display-block">Type</span>
+              <div class="sort-arrows">
+                <i
+                  class="fa fa-angle-up arrows"
+                  aria-hidden="true"
+                  (click)="sortedColumn = ['type', 'asc']"
+                ></i>
+                <i
+                  class="fa fa-angle-down arrows"
+                  aria-hidden="true"
+                  (click)="sortedColumn = ['type', 'desc']"
+                ></i>
+              </div>
+            </div>
+          </th>
+          <th class="th-rows">
+            <div class="sort-align">
+              <span class="display-block">Cuisine</span>
+              <div class="sort-arrows">
+                <i
+                  class="fa fa-angle-up arrows"
+                  aria-hidden="true"
+                  (click)="sortedColumn = ['cuisine', 'asc']"
+                ></i>
+                <i
+                  class="fa fa-angle-down arrows"
+                  aria-hidden="true"
+                  (click)="sortedColumn = ['cuisine', 'desc']"
+                ></i>
+              </div>
+            </div>
+          </th>
+          <th class="th-rows">
+            <div class="sort-align">
+              <span class="display-block">Price</span>
+              <div class="sort-arrows">
+                <i
+                  class="fa fa-angle-up arrows"
+                  aria-hidden="true"
+                  (click)="sortedColumn = ['price', 'asc']"
+                ></i>
+                <i
+                  class="fa fa-angle-down arrows"
+                  aria-hidden="true"
+                  (click)="sortedColumn = ['price', 'desc']"
+                ></i>
+              </div>
+            </div>
+          </th>
+          <th class="th-rows">Quantity</th>
+        </tr>
+      </thead>
+      <tbody
+        *ngFor="
+          let order of ordersData | filter: searchText | sort: sortedColumn
+        "
+      >
+        <tr>
+          <td class="td-rows" data-label="Order Date">
+            {{ order.order_date }}
+          </td>
+          <td class="td-rows" data-label="Order Time">
+            {{ order.order_time }}
+          </td>
+          <td class="td-rows" data-label="Item">{{ order.name }}</td>
+          <td class="td-rows" data-label="Type">{{ order.type }}</td>
+          <td class="td-rows" data-label="Cuisine">{{ order.cuisine }}</td>
+          <td class="td-rows" data-label="Price">Rs.{{ order.price }}</td>
+          <td class="td-rows" data-label="Quantity">{{ order.quantity }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
